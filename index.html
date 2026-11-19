@@ -11,6 +11,8 @@
     />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#26362B" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-title" content="Vida Sana" />
     <link rel="canonical" href="https://avali2.github.io/vida-sana-en-casa/" />
 
     <!-- Open Graph / redes (WhatsApp, Facebook, Instagram) -->
@@ -46,7 +48,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="image" href="images/hero.webp" type="image/webp" fetchpriority="high" />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Public+Sans:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -76,7 +78,11 @@
         color-scheme: light only;
       }
       * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; scroll-padding-top: 74px; }
+      html {
+        scroll-behavior: smooth; scroll-padding-top: 72px;
+        -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+        overflow-x: clip;
+      }
       body {
         margin: 0;
         background: var(--bg);
@@ -85,7 +91,11 @@
         font-size: 17px;
         line-height: 1.55;
         -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: transparent;
+        overflow-x: clip;
       }
+      /* Sin retardo de 300 ms al tocar enlaces y botones (móvil) */
+      a, button, summary, label, input { touch-action: manipulation; }
       img { max-width: 100%; display: block; height: auto; }
       h1, h2, h3, h4, .serif { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; line-height: 1.12; margin: 0; }
       p { margin: 0 0 14px; }
@@ -358,7 +368,7 @@
         padding: 24px 22px 22px; position: relative; overflow: hidden;
         display: flex; flex-direction: column;
       }
-      .bonus::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--salvia); }
+      .bonus::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--salvia); }
       .bonus:nth-child(3n+2)::before { background: var(--miel); }
       .bonus:nth-child(3n)::before { background: var(--terra); }
       .bonus .seal {
@@ -557,6 +567,201 @@
       .sticky-bar .sp .t { font-size: 11.5px; opacity: .85; font-weight: 600; }
       .sticky-bar .cta { flex: 1; padding: 14px 16px; font-size: 15.5px; min-height: 52px; }
       @media (min-width: 800px) { .sticky-bar { display: none; } }
+
+      /* ============================================================
+         COMPATIBILIDAD MÓVIL
+         Probado a 320, 360, 390, 414 y 430 px de ancho, y en horizontal.
+         ============================================================ */
+
+      /* Zonas seguras (notch / isla dinámica), sin romper el diseño */
+      @supports (padding: max(0px)) {
+        .wrap {
+          padding-left: max(20px, env(safe-area-inset-left));
+          padding-right: max(20px, env(safe-area-inset-right));
+        }
+      }
+
+      /* En móvil la barra inferior ya vende: la superior no se queda fija
+         y así no se pierden 60 px de pantalla en cada scroll. */
+      @media (max-width: 799px) {
+        .topbar { position: static; background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+        .topbar .wrap { min-height: 56px; }
+        html { scroll-padding-top: 12px; }
+      }
+
+      @media (max-width: 620px) {
+        body { font-size: 16.5px; }
+        section { padding: 46px 0; }
+        .wrap {
+          padding-left: max(16px, env(safe-area-inset-left));
+          padding-right: max(16px, env(safe-area-inset-right));
+        }
+
+        /* Hero */
+        .hero { padding: 26px 0 40px; }
+        .hero p.lede { font-size: 17.5px; }
+        .hero-facts { gap: 7px 16px; font-size: 14px; margin-top: 20px; }
+        .hero-trust { gap: 7px 14px; font-size: 12.5px; }
+        .hero-badge { left: 12px; bottom: 12px; padding: 11px 14px; gap: 11px; }
+        .hero-badge .price { font-size: 29px; }
+        .hero-photo img { border-radius: 22px; }
+        .hero .cta { width: 100%; }
+
+        .cta { font-size: 16.5px; padding: 16px 22px; }
+        .cta-note { text-align: center; }
+
+        /* Cifras y confianza */
+        .strip .cell { padding: 20px 8px; }
+        .strip .num { font-size: 29px; }
+        .strip .lbl { font-size: 12px; }
+        .trustrow { padding: 15px 0; }
+        .trustrow .wrap { gap: 11px 14px; }
+        .trustrow .ti { font-size: 12.8px; align-items: flex-start; }
+        .trustrow svg { width: 18px; height: 18px; margin-top: 1px; }
+
+        .bonus-head { margin-bottom: 26px; }
+        .mc-photo img { border-radius: 18px; }
+        .checklist li { padding: 13px 14px; }
+        .checklist p { font-size: 14px; }
+
+        /* Muestras del producto: pestañas cómodas de tocar (46 px) */
+        .demo-tabs { gap: 7px; margin-bottom: 20px; }
+        .demo-tabs label {
+          display: inline-flex; align-items: center; justify-content: center;
+          min-height: 46px; padding: 10px 15px; font-size: 13.5px;
+        }
+        .doc-body { padding: 20px 16px 22px; }
+        .doc-bar { font-size: 10px; padding: 9px 14px; letter-spacing: .08em; }
+        .doc h4 { margin-top: 20px; }
+        .macros { grid-template-columns: repeat(2, 1fr); }
+        .macros b { font-size: 15px; }
+        /* Menú semanal: en móvil deja de ser tabla y pasa a tarjetas por día,
+           sin scroll lateral ni columnas cortadas */
+        .menu-tbl { display: block; font-size: 14px; }
+        .menu-tbl thead { display: none; }
+        .menu-tbl tbody, .menu-tbl tr, .menu-tbl td { display: block; }
+        .menu-tbl tr {
+          border: 1px solid var(--line); border-radius: 12px; background: #fff;
+          padding: 10px 12px 6px; margin-bottom: 8px;
+        }
+        .menu-tbl tr:last-child { margin-bottom: 0; }
+        .menu-tbl td { border: 0; padding: 5px 0; display: flex; gap: 10px; align-items: baseline; }
+        .menu-tbl td:first-child {
+          font-size: 15.5px; font-weight: 800; color: var(--verde-deep);
+          border-bottom: 1px dashed var(--line); padding-bottom: 7px; margin-bottom: 4px;
+        }
+        .menu-tbl td:not(:first-child)::before {
+          flex: none; width: 74px; font-size: 10px; font-weight: 800;
+          letter-spacing: .08em; text-transform: uppercase; color: var(--terra-deep);
+          padding-top: 2px;
+        }
+        .menu-tbl td:nth-child(2)::before { content: "Desayuno"; }
+        .menu-tbl td:nth-child(3)::before { content: "Comida"; }
+        .menu-tbl td:nth-child(4)::before { content: "Cena"; }
+        .check-box { padding: 12px 14px; }
+
+        /* Tarjetas */
+        .gal-card h3 { font-size: 19.5px; }
+        .bonus { padding: 20px 18px 18px; }
+        .bonus h3 { font-size: 20.5px; }
+        .fit-card { padding: 22px 20px; }
+        .fit-card h3 { font-size: 21px; }
+        .step-card { padding: 20px 20px 18px; }
+        .step-card h3 { font-size: 19px; }
+
+        /* Garantía */
+        .seal-big { width: 150px; height: 150px; }
+        .seal-big .n { font-size: 44px; }
+        .g-steps li { font-size: 14.5px; padding: 12px 14px; }
+
+        /* Precio */
+        .summary-card { padding: 30px 18px; border-radius: 22px; }
+        .summary-list { font-size: 14.8px; gap: 9px; }
+        .summary-list .pg { padding-left: 8px; }
+        .price-box { padding: 24px 18px; }
+        .price-box .big { font-size: 54px; }
+        .price-box .cta, .cta-band .cta, .final .cta { width: 100%; }
+
+        /* FAQ */
+        details.faq summary { font-size: 15.5px; padding: 15px 16px; }
+        details.faq .body { font-size: 15px; padding: 0 16px 18px; }
+        .faq-help { font-size: 14px; }
+
+        /* Amazon */
+        .amz-disclosure { padding: 13px 15px; font-size: 13px; }
+        a.amz-card { padding: 14px 15px; gap: 12px; }
+        .amz-txt strong { font-size: 15.5px; }
+        .amz-txt em { font-size: 13px; }
+        .amz-ico { width: 38px; height: 38px; border-radius: 10px; }
+        .amz-go { font-size: 11px; }
+
+        /* En pantallas pequeñas la tarjeta se apila: texto legible y
+           "Ver en Amazon" como fila propia, sin apretar el título. */
+        a.amz-card {
+          display: grid; grid-template-columns: 38px minmax(0, 1fr);
+          align-items: start; gap: 10px 12px;
+        }
+        .amz-ico { grid-row: 1; grid-column: 1; }
+        .amz-txt { grid-row: 1; grid-column: 2; }
+        .amz-go {
+          grid-row: 2; grid-column: 1 / -1;
+          justify-content: flex-end; margin-top: 4px; padding-top: 10px;
+          border-top: 1px dashed var(--line); font-size: 12.5px;
+        }
+
+        /* Pie y barra fija */
+        footer { padding: 34px 0 104px; }
+        .foot-links { gap: 4px 10px; }
+        .foot-links a { display: inline-block; padding: 9px 6px; }
+        .foot-legal { font-size: 12px; }
+        .sticky-bar { gap: 10px; padding: 9px 12px calc(9px + env(safe-area-inset-bottom)); }
+        .sticky-bar .cta { font-size: 14.5px; padding: 13px 10px; min-height: 50px; }
+        .sticky-bar .sp .p { font-size: 22px; }
+      }
+
+      /* Pantallas muy estrechas (320–400 px) */
+      @media (max-width: 400px) {
+        .wrap {
+          padding-left: max(14px, env(safe-area-inset-left));
+          padding-right: max(14px, env(safe-area-inset-right));
+        }
+        .hero-facts { font-size: 13.5px; gap: 6px 12px; }
+        .hero-trust { font-size: 12px; }
+        .strip .num { font-size: 26px; }
+        .strip .lbl { font-size: 11.5px; }
+        .cta { font-size: 15.5px; padding: 15px 16px; }
+        .macros { gap: 6px; }
+        .macros span { font-size: 9.5px; }
+        .doc h3 { font-size: 22px; }
+        .doc-kicker { font-size: 10.5px; letter-spacing: .08em; }
+        .price-box .big { font-size: 48px; }
+        .summary-list { font-size: 14.2px; }
+        .summary-list .pg { font-size: 12px; }
+        .brandmark strong { font-size: 14.5px; }
+        .sticky-bar .sp .t { font-size: 10.5px; }
+        .sticky-bar .cta { font-size: 13.5px; }
+      }
+
+      /* Teléfonos en horizontal: menos aire vertical, sin barra fija */
+      @media (max-height: 480px) and (orientation: landscape) {
+        section { padding: 32px 0; }
+        .hero { padding: 18px 0 28px; }
+        .hero h1 { font-size: clamp(26px, 4.4vw, 38px); }
+        .hero .pack-line { font-size: 19px; }
+        .hero p.lede { font-size: 16px; }
+        .hero-photo img { aspect-ratio: 16 / 9; }
+        .sticky-bar { display: none; }
+      }
+
+      /* Navegadores sin aspect-ratio (Android y Safari antiguos) */
+      @supports not (aspect-ratio: 1 / 1) {
+        .hero-photo img { height: auto; }
+        .mc-photo img { height: auto; }
+        .recipe-top img { height: 220px; }
+        .gal-card img { height: 200px; }
+        .band-grid img { height: 230px; }
+        .days span { height: 28px; }
+      }
 
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
@@ -919,7 +1124,7 @@
                 <span class="doc-kicker">Semana 1 · 7 días completos</span>
                 <h3>Tu menú, ya armado</h3>
                 <p class="doc-sub">Sabes qué cocinar cada día sin decidir nada a última hora. Cada comida lleva su receta dentro del curso.</p>
-                <div style="overflow-x:auto; margin-top:20px">
+                <div class="tbl-scroll" style="margin-top:20px">
                   <table class="menu-tbl">
                     <thead>
                       <tr><th>Día</th><th>Desayuno</th><th>Comida</th><th>Cena</th></tr>
