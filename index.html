@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
   <head>
     <meta charset="utf-8" />
@@ -46,7 +46,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href="images/hero.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/avif" fetchpriority="high"
+      imagesrcset="images/hero-520.avif 520w, images/hero-760.avif 760w, images/hero.avif 998w"
+      imagesizes="(min-width: 900px) 500px, 100vw" />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Public+Sans:wght@400;600;700;800&display=swap"
       rel="stylesheet"
@@ -65,8 +67,8 @@
         --ink-soft: #5A665C;
         --verde: #34483B;
         --verde-deep: #26362B;
-        --terra: #C9826B;
-        --terra-deep: #B06A52;
+        --terra: #A85B45;
+        --terra-deep: #95523D;
         --salvia: #A9B9A5;
         --salvia-soft: #DCE5D8;
         --miel: #D9B96E;
@@ -103,6 +105,7 @@
       section { padding: 64px 0; }
       a { color: var(--terra-deep); }
       :focus-visible { outline: 3px solid var(--terra); outline-offset: 3px; border-radius: 6px; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
       .eyebrow {
         display: inline-flex; align-items: center; gap: 8px;
@@ -117,7 +120,7 @@
         background: var(--terra); color: #FFF9F0;
         font-weight: 800; font-size: 17px; text-decoration: none;
         padding: 17px 30px; border-radius: 999px; min-height: 56px;
-        box-shadow: 0 14px 28px -12px rgba(201, 130, 107, .75);
+        box-shadow: 0 14px 28px -12px rgba(168, 91, 69, .72);
         transition: transform .18s ease, background .18s ease;
         text-align: center; border: 0; cursor: pointer;
       }
@@ -209,7 +212,7 @@
         border-radius: 14px; padding: 15px 18px; font-size: 16.5px;
         display: flex; gap: 12px; align-items: flex-start;
       }
-      .pain-list .x { color: #B06A52; font-weight: 900; flex: none; }
+      .pain-list .x { color: var(--terra-deep); font-weight: 900; flex: none; }
       .relief { margin-top: 24px; font-size: 18px; }
       .relief strong { color: var(--verde); }
 
@@ -320,7 +323,7 @@
       .check-grid { display: grid; gap: 14px; }
       @media (min-width: 620px) { .check-grid { grid-template-columns: 1fr 1fr; } }
       .check-box { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: #fff; }
-      .check-box h5 {
+      .check-box h4 {
         margin: 0 0 8px; font-size: 11px; font-weight: 800; letter-spacing: .12em;
         text-transform: uppercase; color: var(--terra-deep);
       }
@@ -413,7 +416,32 @@
       .fit-card li { display: flex; gap: 10px; align-items: flex-start; }
       .fit-card .mk { flex: none; font-weight: 900; }
       .fit-yes .mk { color: var(--miel); }
-      .fit-no .mk { color: #B06A52; }
+      .fit-no .mk { color: var(--terra-deep); }
+
+      /* ---------- Quién está detrás / compromisos ---------- */
+      .about-grid { display: grid; gap: 30px; }
+      @media (min-width: 880px) { .about-grid { grid-template-columns: 1.12fr .88fr; gap: 52px; align-items: start; } }
+      .about-text p { color: var(--ink-soft); font-size: 17px; }
+      .about-text p:last-of-type { margin-bottom: 0; }
+      .about-pts { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 10px; }
+      .about-pts li { display: flex; gap: 10px; align-items: flex-start; font-size: 15.5px; font-weight: 600; color: var(--verde); }
+      .about-pts svg { flex: none; margin-top: 2px; }
+      .promise-card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px 24px 6px; box-shadow: var(--shadow-sm); }
+      .promise-card h3 { font-size: 21px; margin-bottom: 14px; }
+      .promise { display: flex; gap: 12px; padding: 14px 0; border-top: 1px dashed var(--line); }
+      .promise:first-of-type { border-top: 0; padding-top: 0; }
+      .promise-ico { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--salvia-soft); display: grid; place-items: center; }
+      .promise strong { display: block; font-size: 15.5px; line-height: 1.3; }
+      .promise em { display: block; font-style: normal; font-size: 14px; color: var(--ink-soft); margin-top: 3px; line-height: 1.45; }
+
+      /* ---------- Saltar al contenido (accesibilidad) ---------- */
+      .skip-link {
+        position: absolute; left: 12px; top: -70px; z-index: 100;
+        background: var(--verde-deep); color: #F3EEDF; padding: 12px 18px;
+        border-radius: 0 0 12px 12px; font-weight: 700; text-decoration: none;
+        transition: top .15s ease;
+      }
+      .skip-link:focus { top: 0; }
 
       /* ---------- Garantía ---------- */
       .guarantee-sec { background: var(--verde-deep); color: #EFE9D8; }
@@ -446,7 +474,7 @@
       .steps-grid { display: grid; gap: 20px; margin-top: 30px; }
       @media (min-width: 820px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
       .step-card { background: #fff; color: #34483B; border: 1px solid rgba(52,72,59,.12); border-radius: 20px; padding: 24px 24px 20px; }
-      .step-card .n { font-family: "DM Serif Display", Georgia, serif; font-size: 40px; color: #C9826B; line-height: 1; }
+      .step-card .n { font-family: "DM Serif Display", Georgia, serif; font-size: 40px; color: var(--terra); line-height: 1; }
       .step-card h3 { font-size: 20.5px; margin: 10px 0 8px; }
       .step-card p { margin: 0; font-size: 15.5px; color: #5A6656; }
 
@@ -864,6 +892,22 @@
             },
             {
               "@type": "Question",
+              "name": "¿Qué pasa si no me llega el correo de acceso?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Revisa primero la carpeta de spam o promociones. Si no aparece, escríbenos a jobvalidoseo@gmail.com con el correo que usaste al comprar y lo resolvemos. También puedes recuperar tu compra desde tu cuenta de Hotmart con el mismo email."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo leer el material sin conexión?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Los 10 cursos vienen en PDF descargable, así que puedes guardarlos en tu teléfono o computadora y consultarlos sin internet. Los videos sí necesitan conexión, pero puedes verlos cuando quieras: no hay horarios ni fechas de caducidad."
+              }
+            },
+            {
+              "@type": "Question",
               "name": "¿Esto sustituye el consejo de mi médico?",
               "acceptedAnswer": {
                 "@type": "Answer",
@@ -900,6 +944,8 @@
     <!-- End Meta Pixel Code -->
   </head>
   <body>
+
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
     <!-- ================= BARRA SUPERIOR ================= -->
     <div class="topbar">
@@ -947,13 +993,9 @@
         </div>
         <div class="hero-photo">
           <picture>
-            <source srcset="images/hero.webp" type="image/webp" />
-            <img
-              src="images/hero.jpg"
-              width="998" height="1500"
-              alt="Bowls de comida sana casera con quinoa, aguacate, edamame, camote y vegetales asados"
-              fetchpriority="high" decoding="async"
-            />
+            <source type="image/avif" srcset="images/hero-520.avif 520w, images/hero-760.avif 760w, images/hero.avif 998w" sizes="(min-width: 900px) 500px, 100vw" />
+            <source type="image/webp" srcset="images/hero-520.webp 520w, images/hero-760.webp 760w, images/hero.webp 998w" sizes="(min-width: 900px) 500px, 100vw" />
+            <img src="images/hero.jpg" width="998" height="1500" decoding="async" fetchpriority="high" alt="Bowls de comida sana casera con quinoa, aguacate, edamame, camote y vegetales asados" />
           </picture>
           <div class="hero-badge">
             <div class="price">$9,99</div>
@@ -964,6 +1006,7 @@
     </header>
 
     <!-- ================= FRANJA DE CIFRAS ================= -->
+    <main id="contenido">
     <div class="strip" aria-label="El pack en números">
       <div class="wrap">
         <div class="cell"><div class="num">10</div><div class="lbl">cursos en un solo pack</div></div>
@@ -1019,7 +1062,8 @@
       <div class="wrap mc-grid">
         <figure class="mc-photo" style="margin:0">
           <picture>
-            <source srcset="images/curso-salmon.webp" type="image/webp" />
+            <source type="image/avif" srcset="images/curso-salmon-480.avif 480w, images/curso-salmon-800.avif 800w, images/curso-salmon.avif 1100w" sizes="(min-width: 900px) 460px, 100vw" />
+            <source type="image/webp" srcset="images/curso-salmon-480.webp 480w, images/curso-salmon-800.webp 800w, images/curso-salmon.webp 1100w" sizes="(min-width: 900px) 460px, 100vw" />
             <img src="images/curso-salmon.jpg" width="1100" height="1100" loading="lazy" decoding="async" alt="Plato de salmón con vegetales asados" />
           </picture>
           <figcaption>Las 30 recetas del curso traen foto, gramos exactos y macros por porción.</figcaption>
@@ -1069,7 +1113,7 @@
           <input class="demo-switch" type="radio" name="demo" id="d3" />
           <input class="demo-switch" type="radio" name="demo" id="d4" />
 
-          <div class="demo-tabs" role="tablist" aria-label="Muestras del contenido">
+          <div class="demo-tabs" role="group" aria-label="Muestras del contenido">
             <label for="d1">Receta</label>
             <label for="d2">Menú semanal</label>
             <label for="d3">Lista de compra</label>
@@ -1086,9 +1130,10 @@
                 <p class="doc-sub">Una sartén, tres ingredientes y diez minutos. El desayuno que resuelve la mañana sin pensar.</p>
                 <div class="recipe-top" style="margin-top:18px">
                   <picture>
-                    <source srcset="images/receta-huevos-espinaca.webp" type="image/webp" />
-                    <img src="images/receta-huevos-espinaca.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Huevos con espinaca" />
-                  </picture>
+            <source type="image/avif" srcset="images/receta-huevos-espinaca-400.avif 400w, images/receta-huevos-espinaca.avif 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <source type="image/webp" srcset="images/receta-huevos-espinaca-400.webp 400w, images/receta-huevos-espinaca.webp 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <img src="images/receta-huevos-espinaca.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Huevos con espinaca" />
+          </picture>
                   <div>
                     <h4 style="margin-top:0">Ingredientes (1 porción)</h4>
                     <ul class="ing">
@@ -1153,7 +1198,7 @@
                 <p class="doc-sub">Cantidades en gramos para que no compres de más ni te falte nada a mitad de la semana.</p>
                 <div class="check-grid" style="margin-top:20px">
                   <div class="check-box">
-                    <h5>Verduras y frutas</h5>
+                    <h4>Verduras y frutas</h5>
                     <ul>
                       <li>Espinaca fresca · 300 g</li>
                       <li>Tomate cherry · 250 g</li>
@@ -1164,7 +1209,7 @@
                     </ul>
                   </div>
                   <div class="check-box">
-                    <h5>Proteína</h5>
+                    <h4>Proteína</h5>
                     <ul>
                       <li>Huevos · 12 unidades</li>
                       <li>Pechuga de pollo · 1 kg</li>
@@ -1175,7 +1220,7 @@
                     </ul>
                   </div>
                   <div class="check-box">
-                    <h5>Despensa</h5>
+                    <h4>Despensa</h5>
                     <ul>
                       <li>Quinoa · 500 g</li>
                       <li>Avena · 500 g</li>
@@ -1186,7 +1231,7 @@
                     </ul>
                   </div>
                   <div class="check-box">
-                    <h5>Congelados y extras</h5>
+                    <h4>Congelados y extras</h5>
                     <ul>
                       <li>Edamame · 400 g</li>
                       <li>Verduras para sopa · 1 kg</li>
@@ -1255,9 +1300,10 @@
         <div class="gal-grid">
           <article class="gal-card">
             <picture>
-              <source srcset="images/receta-huevos-espinaca.webp" type="image/webp" />
-              <img src="images/receta-huevos-espinaca.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Huevos con espinaca" />
-            </picture>
+            <source type="image/avif" srcset="images/receta-huevos-espinaca-400.avif 400w, images/receta-huevos-espinaca.avif 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <source type="image/webp" srcset="images/receta-huevos-espinaca-400.webp 400w, images/receta-huevos-espinaca.webp 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <img src="images/receta-huevos-espinaca.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Huevos con espinaca" />
+          </picture>
             <div class="gc-body">
               <span class="time-chip">10 MIN</span>
               <h3>Huevos con espinaca</h3>
@@ -1266,9 +1312,10 @@
           </article>
           <article class="gal-card">
             <picture>
-              <source srcset="images/receta-huevos-requeson.webp" type="image/webp" />
-              <img src="images/receta-huevos-requeson.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Huevos con requesón y espinaca" />
-            </picture>
+            <source type="image/avif" srcset="images/receta-huevos-requeson-400.avif 400w, images/receta-huevos-requeson.avif 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <source type="image/webp" srcset="images/receta-huevos-requeson-400.webp 400w, images/receta-huevos-requeson.webp 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <img src="images/receta-huevos-requeson.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Huevos con requesón y espinaca" />
+          </picture>
             <div class="gc-body">
               <span class="time-chip">12 MIN</span>
               <h3>Huevos con requesón y espinaca</h3>
@@ -1277,9 +1324,10 @@
           </article>
           <article class="gal-card">
             <picture>
-              <source srcset="images/receta-muffins.webp" type="image/webp" />
-              <img src="images/receta-muffins.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Muffins de huevo" />
-            </picture>
+            <source type="image/avif" srcset="images/receta-muffins-400.avif 400w, images/receta-muffins.avif 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <source type="image/webp" srcset="images/receta-muffins-400.webp 400w, images/receta-muffins.webp 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <img src="images/receta-muffins.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Muffins de huevo" />
+          </picture>
             <div class="gc-body">
               <span class="time-chip">30 MIN</span>
               <h3>Muffins de huevo</h3>
@@ -1288,9 +1336,10 @@
           </article>
           <article class="gal-card">
             <picture>
-              <source srcset="images/receta-pollo-limon.webp" type="image/webp" />
-              <img src="images/receta-pollo-limon.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Pollo cremoso con limón" />
-            </picture>
+            <source type="image/avif" srcset="images/receta-pollo-limon-400.avif 400w, images/receta-pollo-limon.avif 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <source type="image/webp" srcset="images/receta-pollo-limon-400.webp 400w, images/receta-pollo-limon.webp 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <img src="images/receta-pollo-limon.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Pollo cremoso con limón" />
+          </picture>
             <div class="gc-body">
               <span class="time-chip">30 MIN</span>
               <h3>Pollo cremoso con limón</h3>
@@ -1299,9 +1348,10 @@
           </article>
           <article class="gal-card">
             <picture>
-              <source srcset="images/receta-pollo-espinaca.webp" type="image/webp" />
-              <img src="images/receta-pollo-espinaca.jpg" width="800" height="451" loading="lazy" decoding="async" alt="Pollo con espinaca" />
-            </picture>
+            <source type="image/avif" srcset="images/receta-pollo-espinaca-400.avif 400w, images/receta-pollo-espinaca.avif 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <source type="image/webp" srcset="images/receta-pollo-espinaca-400.webp 400w, images/receta-pollo-espinaca.webp 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <img src="images/receta-pollo-espinaca.jpg" width="800" height="451" loading="lazy" decoding="async" alt="Pollo con espinaca" />
+          </picture>
             <div class="gc-body">
               <span class="time-chip">30 MIN</span>
               <h3>Pollo con espinaca</h3>
@@ -1310,9 +1360,10 @@
           </article>
           <article class="gal-card">
             <picture>
-              <source srcset="images/receta-flatbreads.webp" type="image/webp" />
-              <img src="images/receta-flatbreads.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Mini flatbreads de requesón" />
-            </picture>
+            <source type="image/avif" srcset="images/receta-flatbreads-400.avif 400w, images/receta-flatbreads.avif 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <source type="image/webp" srcset="images/receta-flatbreads-400.webp 400w, images/receta-flatbreads.webp 800w" sizes="(min-width: 980px) 330px, (min-width: 720px) 33vw, 100vw" />
+            <img src="images/receta-flatbreads.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Mini flatbreads de requesón" />
+          </picture>
             <div class="gc-body">
               <span class="time-chip">35 MIN</span>
               <h3>Mini flatbreads de requesón</h3>
@@ -1426,21 +1477,24 @@
       <div class="wrap band-grid">
         <figure>
           <picture>
-            <source srcset="images/band-desayuno.webp" type="image/webp" />
+            <source type="image/avif" srcset="images/band-desayuno-300.avif 300w, images/band-desayuno.avif 690w" sizes="(min-width: 800px) 330px, 33vw" />
+            <source type="image/webp" srcset="images/band-desayuno-300.webp 300w, images/band-desayuno.webp 690w" sizes="(min-width: 800px) 330px, 33vw" />
             <img src="images/band-desayuno.jpg" width="690" height="690" loading="lazy" decoding="async" alt="Desayuno con huevos, aguacate y frutas" />
           </picture>
           <figcaption>Romper el ayuno</figcaption>
         </figure>
         <figure>
           <picture>
-            <source srcset="images/band-mealprep.webp" type="image/webp" />
+            <source type="image/avif" srcset="images/band-mealprep-320.avif 320w, images/band-mealprep.avif 768w" sizes="(min-width: 800px) 330px, 33vw" />
+            <source type="image/webp" srcset="images/band-mealprep-320.webp 320w, images/band-mealprep.webp 768w" sizes="(min-width: 800px) 330px, 33vw" />
             <img src="images/band-mealprep.jpg" width="768" height="960" loading="lazy" decoding="async" alt="Contenedores de meal prep con comidas de la semana" />
           </picture>
           <figcaption>Meal prep de la semana</figcaption>
         </figure>
         <figure>
           <picture>
-            <source srcset="images/band-galletas.webp" type="image/webp" />
+            <source type="image/avif" srcset="images/band-galletas-320.avif 320w, images/band-galletas.avif 900w" sizes="(min-width: 800px) 330px, 33vw" />
+            <source type="image/webp" srcset="images/band-galletas-320.webp 320w, images/band-galletas.webp 900w" sizes="(min-width: 800px) 330px, 33vw" />
             <img src="images/band-galletas.jpg" width="900" height="1350" loading="lazy" decoding="async" alt="Galletas caseras sin azúcar añadida en un plato" />
           </picture>
           <figcaption>Dulces sin azúcar añadida</figcaption>
@@ -1477,6 +1531,67 @@
           </div>
         </div>
         <p class="relief" style="text-align:center">Aquí no encontrarás promesas mágicas ni reglas imposibles. Encontrarás recetas claras, orden en tu cocina y herramientas prácticas para el día a día.</p>
+      </div>
+    </section>
+
+    <!-- ================= QUIÉN ESTÁ DETRÁS / COMPROMISOS ================= -->
+    <section id="proyecto" style="background:var(--bg-soft)">
+      <div class="wrap">
+        <div class="bonus-head">
+          <span class="eyebrow">Quién está detrás</span>
+          <h2 class="title">Un proyecto pequeño, hecho para resolver la semana</h2>
+          <p class="sub" style="margin-left:auto;margin-right:auto">
+            Preferimos contarte cómo funciona esto antes de que pagues. Y también qué no vas a encontrar aquí.
+          </p>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>Vida Sana en Casa nació de una pregunta muy concreta: <strong>¿por qué cuesta tanto decidir qué cocinar y cuánto usar de cada cosa?</strong></p>
+            <p>Este pack es la respuesta que nos habría gustado tener en nuestra propia cocina: recetas con gramos exactos, menús ya armados y listas de compra listas para el mercado. Sin promesas de milagros, sin dietas extremas y sin tener que estudiar nutrición para empezar.</p>
+            <p>No somos una marca gigante. Somos un equipo pequeño que vende contenido digital, responde los correos y devuelve el dinero cuando el pack no es para ti. Nada más.</p>
+            <ul class="about-pts">
+              <li>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#34483B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>No te pedimos que confíes a ciegas: en <a href="#muestra">«Así es una página del curso»</a> ves el formato exacto antes de pagar.</span>
+              </li>
+              <li>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#34483B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>Contenido 100% en español, pensado para leerse en el celular, la tablet o la computadora.</span>
+              </li>
+              <li>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#34483B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>Si algo no queda claro, escribes a <a href="mailto:jobvalidoseo@gmail.com">jobvalidoseo@gmail.com</a> y te contestamos.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="promise-card">
+            <h3>Nuestros compromisos</h3>
+            <div class="promise">
+              <div class="promise-ico">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#34483B" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7 2 13h6z"/><path d="M19 7l-3 6h6z"/></svg>
+              </div>
+              <div><strong>No prometemos resultados</strong><em>Hablamos de cocina y de método, no de kilos ni de curas. Si alguien te promete eso, desconfía.</em></div>
+            </div>
+            <div class="promise">
+              <div class="promise-ico">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#34483B" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M2.5 10h19"/></svg>
+              </div>
+              <div><strong>Precio claro, sin letra pequeña</strong><em>$9,99 una sola vez. Sin suscripción, sin renovaciones y sin cargos que aparezcan después.</em></div>
+            </div>
+            <div class="promise">
+              <div class="promise-ico">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#34483B" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z"/><path d="m9 11.5 2 2 4-4.5"/></svg>
+              </div>
+              <div><strong>Reembolso sin preguntas</strong><em>15 días desde la compra. Lo pides desde tu cuenta de Hotmart y te devuelven el 100%.</em></div>
+            </div>
+            <div class="promise">
+              <div class="promise-ico">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#34483B" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div><strong>Soporte de verdad</strong><em>Detrás del correo hay una persona, no un bot. Respondemos lo antes que podemos.</em></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1540,7 +1655,8 @@
       <div class="wrap">
         <figure class="banner-fig">
           <picture>
-            <source srcset="images/banner-pack.webp" type="image/webp" />
+            <source type="image/avif" srcset="images/banner-pack-500.avif 500w, images/banner-pack.avif 1000w" sizes="(min-width: 800px) 500px, 100vw" />
+            <source type="image/webp" srcset="images/banner-pack-500.webp 500w, images/banner-pack.webp 1000w" sizes="(min-width: 800px) 500px, 100vw" />
             <img src="images/banner-pack.jpg" width="1000" height="1333" loading="lazy" decoding="async" alt="Vida Sana en Casa — Pack de 10 Cursos: todo lo que recibes por $9,99" />
           </picture>
         </figure>
@@ -1622,6 +1738,14 @@
             <div class="body"><p>El acceso es permanente y sin renovaciones: pagas una vez y el material queda en tu biblioteca de Hotmart. Puedes descargar los PDF e imprimirlos cuando quieras.</p></div>
           </details>
           <details class="faq">
+            <summary>¿Qué pasa si no me llega el correo de acceso?<span class="plus" aria-hidden="true">+</span></summary>
+            <div class="body"><p>Primero revisa la carpeta de spam o promociones: casi siempre está ahí. Si no aparece, escríbenos a <a href="mailto:jobvalidoseo@gmail.com">jobvalidoseo@gmail.com</a> con el correo que usaste al comprar y lo resolvemos. El pago lo procesa Hotmart, así que también puedes recuperar tu compra desde tu cuenta de Hotmart con el mismo email.</p></div>
+          </details>
+          <details class="faq">
+            <summary>¿Puedo leer el material sin conexión?<span class="plus" aria-hidden="true">+</span></summary>
+            <div class="body"><p>Sí. Los 10 cursos vienen en PDF descargable, así que puedes guardarlos en tu teléfono o computadora y consultarlos sin internet. Los videos sí necesitan conexión, pero puedes verlos cuando quieras: no hay horarios ni fechas de caducidad.</p></div>
+          </details>
+          <details class="faq">
             <summary>¿Esto sustituye el consejo de mi médico?<span class="plus" aria-hidden="true">+</span></summary>
             <div class="body"><p>No. Todo el contenido del pack —incluida la Edición Diabetes— es información de cocina y organización de comidas, no consejo médico. No promete bajar kilos, controlar la glucosa ni curar ninguna condición. Si tienes una condición de salud, sigue siempre las indicaciones de tu médico.</p></div>
           </details>
@@ -1644,7 +1768,7 @@
         </div>
 
         <div class="amz-disclosure">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B06A52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9C5640" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
           <p style="margin:0">
             <strong>Transparencia:</strong> como Asociado de Amazon, gano una comisión por las compras que cumplan
             los requisitos. El precio que pagas es el mismo y no influye en lo que recomendamos aquí.
@@ -1661,7 +1785,7 @@
               <strong>Báscula digital de cocina (0,1 g)</strong>
               <em>La que hace posible los gramos exactos de cada receta.</em>
             </span>
-            <span class="amz-go">Ver en Amazon ↗</span>
+            <span class="amz-go">Ver en Amazon ↗<span class="sr-only"> (se abre en Amazon en una pestaña nueva)</span></span>
           </a>
           <a class="amz-card" href="https://www.amazon.com/s?k=juego+de+tazas+y+cucharas+medidoras+acero&tag=validsumshop-20" target="_blank" rel="sponsored nofollow noopener" data-product="tazas y cucharas medidoras">
             <span class="amz-ico" aria-hidden="true">
@@ -1671,7 +1795,7 @@
               <strong>Tazas y cucharas medidoras</strong>
               <em>Para los ingredientes que van por volumen y no por peso.</em>
             </span>
-            <span class="amz-go">Ver en Amazon ↗</span>
+            <span class="amz-go">Ver en Amazon ↗<span class="sr-only"> (se abre en Amazon en una pestaña nueva)</span></span>
           </a>
         </div>
 
@@ -1685,7 +1809,7 @@
               <strong>Freidora de aire</strong>
               <em>Pollo, verduras y pescado en menos tiempo y con menos aceite.</em>
             </span>
-            <span class="amz-go">Ver en Amazon ↗</span>
+            <span class="amz-go">Ver en Amazon ↗<span class="sr-only"> (se abre en Amazon en una pestaña nueva)</span></span>
           </a>
           <a class="amz-card" href="https://www.amazon.com/s?k=procesador+de+alimentos+electrico&tag=validsumshop-20" target="_blank" rel="sponsored nofollow noopener" data-product="procesador de alimentos">
             <span class="amz-ico" aria-hidden="true">
@@ -1695,7 +1819,7 @@
               <strong>Procesador de alimentos</strong>
               <em>Para picar, mezclar y dejar listo el meal prep en una sesión.</em>
             </span>
-            <span class="amz-go">Ver en Amazon ↗</span>
+            <span class="amz-go">Ver en Amazon ↗<span class="sr-only"> (se abre en Amazon en una pestaña nueva)</span></span>
           </a>
           <a class="amz-card" href="https://www.amazon.com/s?k=sarten+antiadherente+28cm&tag=validsumshop-20" target="_blank" rel="sponsored nofollow noopener" data-product="sartén antiadherente">
             <span class="amz-ico" aria-hidden="true">
@@ -1705,7 +1829,7 @@
               <strong>Sartén antiadherente de 28 cm</strong>
               <em>El tamaño que usan casi todas las recetas del curso.</em>
             </span>
-            <span class="amz-go">Ver en Amazon ↗</span>
+            <span class="amz-go">Ver en Amazon ↗<span class="sr-only"> (se abre en Amazon en una pestaña nueva)</span></span>
           </a>
           <a class="amz-card" href="https://www.amazon.com/s?k=termometro+de+cocina+digital&tag=validsumshop-20" target="_blank" rel="sponsored nofollow noopener" data-product="termómetro de cocina">
             <span class="amz-ico" aria-hidden="true">
@@ -1715,7 +1839,7 @@
               <strong>Termómetro de cocina digital</strong>
               <em>Clave para cocinar pollo y pescado de forma segura.</em>
             </span>
-            <span class="amz-go">Ver en Amazon ↗</span>
+            <span class="amz-go">Ver en Amazon ↗<span class="sr-only"> (se abre en Amazon en una pestaña nueva)</span></span>
           </a>
         </div>
 
@@ -1729,7 +1853,7 @@
               <strong>Contenedores de vidrio herméticos</strong>
               <em>El corazón del meal prep: cocinas una vez y comes toda la semana.</em>
             </span>
-            <span class="amz-go">Ver en Amazon ↗</span>
+            <span class="amz-go">Ver en Amazon ↗<span class="sr-only"> (se abre en Amazon en una pestaña nueva)</span></span>
           </a>
           <a class="amz-card" href="https://www.amazon.com/s?k=etiquetas+para+congelador+y+conservacion&tag=validsumshop-20" target="_blank" rel="sponsored nofollow noopener" data-product="etiquetas de conservación">
             <span class="amz-ico" aria-hidden="true">
@@ -1739,7 +1863,7 @@
               <strong>Etiquetas para congelador</strong>
               <em>La guía de conservación segura del Bonus 8 pide anotar fecha y contenido.</em>
             </span>
-            <span class="amz-go">Ver en Amazon ↗</span>
+            <span class="amz-go">Ver en Amazon ↗<span class="sr-only"> (se abre en Amazon en una pestaña nueva)</span></span>
           </a>
         </div>
 
@@ -1761,6 +1885,8 @@
       </div>
     </section>
 
+    </main>
+
     <!-- ================= FOOTER ================= -->
     <footer>
       <div class="wrap">
@@ -1769,6 +1895,7 @@
         <div class="foot-links">
           <a href="#muestra">Ver por dentro</a>
           <a href="#precio">Precio</a>
+          <a href="#proyecto">Quién está detrás</a>
           <a href="#faq">Preguntas frecuentes</a>
           <a href="privacidad.html">Privacidad</a>
           <a href="terminos.html">Términos</a>
@@ -1782,6 +1909,7 @@
           recomendaciones de herramientas son independientes del curso y no son necesarias para usarlo.
           El pago del pack se procesa en Hotmart, plataforma independiente.
         </p>
+        <p class="foot-legal" style="margin-top:10px">Última actualización de esta página: noviembre de 2026.</p>
       </div>
     </footer>
 
@@ -1793,6 +1921,36 @@
       </div>
       <a class="cta" href="https://pay.hotmart.com/G108501478X?checkoutMode=10">Quiero el pack completo</a>
     </div>
+
+
+    <!-- ============================================================
+         TESTIMONIOS — listo para cuando tengas reseñas REALES
+         ------------------------------------------------------------
+         No inventes reseñas: es engañoso, puede costarte la cuenta de
+         anuncios y romper justo la confianza que buscamos.
+         Pide a 3-5 personas que compraron:
+           · nombre + ciudad (o iniciales: "María G., Dallas")
+           · una frase CONCRETA de lo que les sirvió (no "excelente")
+           · permiso para publicarla
+         Cuando las tengas: reemplaza los textos, quita el comentario
+         de apertura y el de cierre, y cambia id="opiniones".
+         ============================================================
+    <section id="opiniones" style="background:var(--bg-soft)">
+      <div class="wrap">
+        <div class="bonus-head">
+          <span class="eyebrow">Lo que dicen quienes lo usaron</span>
+          <h2 class="title">Reseñas de compradores</h2>
+        </div>
+        <div class="bonus-grid">
+          <article class="bonus">
+            <p style="font-size:16.5px;color:var(--ink);font-style:italic">«NOMBRE, CIUDAD»</p>
+            <p style="font-size:15.5px;color:var(--ink-soft);margin-top:10px">Frase concreta y verificable de lo que le sirvió.</p>
+            <div class="meta"><span>Comprador verificado</span><span class="free">★★★★★</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+    -->
 
   </body>
 </html>
