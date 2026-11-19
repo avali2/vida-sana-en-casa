@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avali2.github.io/vida-sana-en-casa/sitemap.xml
